@@ -701,3 +701,52 @@ mount();
 (async()=>{try{if(!window.supabase)throw Error('Cloud connection unavailable. Connect to the internet to sign in.');client=supabase.createClient('https://guysjyzburhhmgqexeuo.supabase.co','sb_publishable_IOYwRTv51qxjs-Op21mAiA_fkMd8DUj');client.auth.onAuthStateChange((event,s)=>{session=s;if(event==='PASSWORD_RECOVERY'){setTimeout(async()=>{const password=prompt('Enter your new password (at least 6 characters)');if(password&&password.length>=6){try{check(await client.auth.updateUser({password}));switchTo(s.user.id)}catch(e){status(e.message)}}},0)}else if(event==='SIGNED_IN'&&s&&!active&&!location.hash.includes('type=recovery'))setTimeout(()=>switchTo(s.user.id),0);draw()});session=check(await client.auth.getSession()).session;draw();if(active&&session?.user?.id!==active)status('Session expired. Sign out and sign in again.');if(!active&&session&&!location.hash.includes('type=recovery'))switchTo(session.user.id);}catch(e){status(e.message)}})();
 })();
 </script>
+<style id="pcResponsive611">
+/* 6.11 responsive touch layout; preserve intentional PDF pinch zoom. */
+@media screen and (pointer:coarse) {
+ html { -webkit-text-size-adjust:100%; text-size-adjust:100%; }
+ body input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=color]):not([type=file]), body textarea, body select, body [contenteditable=true] {font-size:16px!important;}
+ button, a, summary, input[type=checkbox], input[type=radio] {touch-action:manipulation;}
+}
+@media screen and (max-width:700px) {
+ body input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=color]):not([type=file]), body textarea, body select, body [contenteditable=true] {font-size:16px!important;}
+ body > header {padding:16px 14px 12px;gap:8px;flex-wrap:nowrap;}
+ body header h1 {font-size:clamp(19px,5.5vw,27px)!important;overflow-wrap:anywhere;}
+ body > nav {gap:18px;padding:0 14px;overflow-x:auto;white-space:nowrap;scrollbar-width:none;max-width:100%;}
+ body > nav button {flex:none;min-height:44px;}
+ body > main {width:100%;min-width:0;padding:16px 12px;}
+ main .toolbar {gap:8px;min-width:0;}
+ main .toolbar h2 {flex:1 0 100%;font-size:21px;overflow-wrap:anywhere;}
+ main .toolbar button {min-height:44px;max-width:100%;white-space:normal;}
+ main .panel {min-width:0;max-width:100%;}
+ #practicePage .scroll {max-width:100%;overflow-x:auto;overscroll-behavior-x:contain;}
+ #chart {min-width:1200px;}
+ #chart th:first-child {width:120px;}
+ #chart input[type=checkbox] {width:22px;height:22px;}
+ #chart textarea {min-height:48px;}
+ #practicePage #weeklyStats .stat {padding:10px 5px;overflow-wrap:anywhere;}
+ .lower {grid-template-columns:minmax(0,1fr);}
+ .insight-day {grid-template-columns:30px minmax(0,1fr) minmax(0,1fr) 48px;gap:5px;}
+ .calendar-grid {width:100%;min-width:0;}
+ .cal-head {padding:8px 0;font-size:11px;}
+ .cal-day {min-height:64px;padding:3px;}
+ .cal-event {overflow-wrap:anywhere;white-space:normal;}
+ .progress-hero .progress-streak {grid-template-columns:minmax(0,1fr);gap:12px;}
+ .streak-best {border-left:0;border-top:1px solid var(--theme-border,#cbd5e1);padding:12px 0 0;}
+ .streak-days {gap:3px;}
+ .streak-dot {width:clamp(24px,7vw,36px);font-size:14px;}
+ #notesPage #notebook .nb-tools {flex-wrap:wrap;}
+ #visualLibrary .library-grid,#notebook .library-grid {grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;}
+ dialog[open] {max-width:calc(100vw - 24px);max-height:calc(100dvh - 24px);overflow-y:auto;}
+ #settingsDialog {padding:16px;}
+ html.pc-auth-required #pcDialog[open] {padding:22px;max-height:calc(100dvh - 24px);overflow-y:auto;}
+ #pcDialog button {min-height:44px;}
+ #metroPopup {right:12px;bottom:calc(78px + env(safe-area-inset-bottom,0px));width:min(340px,calc(100vw - 24px));max-height:calc(100dvh - 100px - env(safe-area-inset-bottom,0px));}
+ #metroLauncher {right:12px;bottom:max(12px,env(safe-area-inset-bottom));}
+ html.instrument-home body {padding-bottom:0;}
+ html.instrument-home #instrumentLanding {padding:32px 16px;gap:24px;min-height:100dvh;}
+ html #instrumentLanding .instrument-tile .instrument-circle {width:140px!important;height:140px!important;}
+ html #instrumentLanding .instrument-tile-base {margin-top:-44px!important;padding-top:54px!important;}
+ html #instrumentLanding .instrument-add {width:64px!important;height:64px!important;}
+}
+</style>
