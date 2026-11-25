@@ -6,7 +6,7 @@ window.pcDBName=k=>prefix+k;
 </script><script>if('serviceWorker' in navigator){window.addEventListener('load',async()=>{try{await navigator.serviceWorker.register('./sw.js');await navigator.serviceWorker.ready;console.info('Practice Chart offline worker ready')}catch(e){console.warn('Offline setup failed',e)}})}</script><script>
 const profileStore='practiceInstrumentProfiles-v1';
 let profiles;try{profiles=JSON.parse(pcLocal.getItem(profileStore))}catch{};
-if(!Array.isArray(profiles)){profiles=[{id:'legacy',name:'Violin',icon:'🎻'}];pcLocal.setItem(profileStore,JSON.stringify(profiles))}
+if(!Array.isArray(profiles)){profiles=[];pcLocal.setItem(profileStore,JSON.stringify(profiles))}
 let selectedInstrument;try{selectedInstrument=sessionStorage.getItem('practiceActiveInstrument')}catch{};const currentProfile=profiles.find(p=>location.hash==='#instrument='+p.id)||profiles.find(p=>p.id===selectedInstrument);
 function workspaceKey(k){return !currentProfile||currentProfile.id==='legacy'||k==='practiceSettings'?k:k+'::'+currentProfile.id}
 function enterInstrument(id){try{sessionStorage.setItem('practiceActiveInstrument',id)}catch{};if(currentProfile?.id===id){document.documentElement.classList.remove('instrument-home');return}location.hash='instrument='+id;location.reload()}
