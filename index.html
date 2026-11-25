@@ -467,7 +467,21 @@ body.binder-performance #scoreReader:before,body.binder-performance #scoreReader
 body.binder-performance #binderMenu,body.binder-performance #binderClose{display:none!important}
 body.binder-performance #performanceExit:not([hidden]){display:grid!important;place-items:center;position:fixed;top: max(12px,env(safe-area-inset-top));left:max(12px,env(safe-area-inset-left));z-index:1200;width:38px;height:38px;padding:0;border:1px solid #ccc;border-radius:50%;background:#fff;color:#222;font:normal 26px/1 Arial,sans-serif;box-shadow:none;cursor:pointer}
 body:not(.binder-performance) #performanceExit{display:none!important}
-</style></head><body><div id="sheet"><div id="printContent">${content}</div></div><style id="connected-instrument-tiles">
+</style>
+<meta property="og:type" content="website">
+<meta property="og:title" content="Practice Chart">
+<meta property="og:description" content="Your practice workspace, wherever you go.">
+<meta property="og:url" content="https://practicechart.app/">
+<meta property="og:image" content="https://practicechart.app/share-preview.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1000">
+<meta property="og:image:height" content="500">
+<meta property="og:image:alt" content="Practice Chart app preview on three iPads">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Practice Chart">
+<meta name="twitter:description" content="Your practice workspace, wherever you go.">
+<meta name="twitter:image" content="https://practicechart.app/share-preview.jpg">
+</head><body><div id="sheet"><div id="printContent">${content}</div></div><style id="connected-instrument-tiles">
 #instrumentLanding .instrument-item{width:min(230px,100%);align-self:flex-start}
 #instrumentLanding .instrument-tile{gap:0!important;isolation:isolate;position:relative;padding:0!important;border:0!important;box-shadow:none!important;background:transparent!important}
 #instrumentLanding .instrument-tile .instrument-circle{position:relative;z-index:1;width:clamp(110px,20vw,160px);flex-shrink:0;box-shadow:0 6px 15px #0002}
