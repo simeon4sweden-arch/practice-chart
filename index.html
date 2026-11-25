@@ -750,3 +750,61 @@ mount();
  html #instrumentLanding .instrument-add {width:64px!important;height:64px!important;}
 }
 </style>
+
+<style id="pc-mobile-612">
+#pcMobileNav,#pcMobileDays{display:none}
+#instrumentCreate .pc-instrument-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+#instrumentCreate .pc-instrument-actions button{width:100%;min-height:44px;margin:0;white-space:normal}
+#instrumentCreate #instrumentDelete{grid-column:1/-1}
+#instrumentCreate #instrumentDelete[hidden]{display:none!important}
+@media screen and (pointer:coarse){
+ html.pc-keyboard dialog[open]{position:fixed!important;inset:auto!important;top:calc(var(--pc-vtop,0px) + 8px)!important;left:50%!important;transform:translateX(-50%)!important;margin:0!important;max-height:calc(var(--pc-vheight,100dvh) - 16px)!important;max-width:calc(100vw - 24px)!important;overflow-y:auto!important;overscroll-behavior:contain;scroll-padding:16px}
+ html.pc-keyboard #pcDialog[open]{max-height:calc(var(--pc-vheight,100dvh) - 16px)!important}
+}
+@media screen and (max-width:700px){
+ body>header{position:relative;padding:12px 14px!important;min-height:58px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+ body>header>div{min-width:0;flex:1;order:0}
+ body>header h1{font-size:19px!important;gap:7px!important;line-height:1.2!important}
+ body>header h1 .workspace-instrument-name{font-size:16px!important;padding-left:7px!important}
+ body>header #settingsGear,body>header .instrument-switch,body>nav{display:none!important}
+ #pcMobileNav{display:block;order:1;flex:none}
+ #pcMobileMenuToggle{min-width:44px;min-height:44px;display:grid;place-items:center;padding:8px;background:transparent;color:inherit;border:0}
+ #pcMobileMenu{position:absolute;z-index:1000;right:12px;top:100%;width:min(280px,calc(100vw - 24px));padding:8px;background:var(--theme-bg,#fff);color:var(--theme-ink,#111);border:1px solid var(--theme-border,#cbd5e1);border-radius:12px;box-shadow:0 10px 30px #0002}
+ #pcMobileMenu[hidden]{display:none!important}
+ #pcMobileMenu button{display:block;width:100%;text-align:left;min-height:44px;border:0;background:transparent;color:inherit;padding:10px 12px}
+ #pcMobileMenu button[aria-current=page]{background:var(--theme-selection,#e7eff8);color:var(--theme-accent,#0754a5);border-radius:7px}
+ body>main{padding:12px!important}
+ #practicePage .toolbar{display:grid;grid-template-columns:44px 1fr 44px 44px;gap:6px;align-items:center}
+ #practicePage .toolbar h2{grid-column:1/-1;font-size:18px;margin:0 0 4px}
+ #practicePage .toolbar>button{min-width:0;padding:6px;font-size:13px}
+ #practicePage #recordLesson,#practicePage .toolbar>button[onclick="chooseAudio()"]{display:none}
+ #practicePage #practiceOptions{grid-column:4;grid-row:2;justify-self:end}
+ #practicePage #recordStatus{grid-column:1/-1}
+ #pcMobileDays{display:flex;gap:4px;margin:8px 0;align-items:center}
+ #pcMobileDays button{flex:1;min-width:0;min-height:44px;padding:5px 1px;font-size:12px}
+ #pcMobileDays button[aria-pressed=true]{background:var(--theme-accent,#0754a5);color:white}
+ #pcMobileDays .pc-week-toggle{flex:0 0 auto;padding:5px 8px}
+ #practicePage.pc-day-mode #chart{min-width:0!important;width:100%!important;table-layout:fixed}
+ #practicePage.pc-day-mode #chart tr:not(.section)>:first-child{width:42%!important;min-width:0!important;max-width:none!important;position:static!important}
+ #practicePage.pc-day-mode #chart tr:not(.section)>:not(:first-child){width:58%!important;min-width:0!important;max-width:none!important}
+ #practicePage.pc-day-mode #chart .pc-day-hidden{display:none!important}
+ #practicePage.pc-day-mode #chart .section-name{max-width:100%!important;width:100%!important}
+ #practicePage.pc-day-mode #chart textarea,#practicePage.pc-day-mode #chart input:not([type=checkbox]){max-width:100%;min-width:0}
+ #practicePage.pc-day-mode #chart .section-fixed{position:static!important}
+ #practicePage.pc-day-mode #chart .section-fill{width:58%!important}
+ #practicePage.pc-day-mode #chart td{padding:7px!important}
+ #practicePage.pc-day-mode #chart textarea{min-height:40px}
+ #instrumentForm{padding:18px!important}
+ #pcMobileMenu hr{border:0;border-top:1px solid var(--theme-border,#ddd);margin:4px 0}
+}
+</style>
+<script id="pc-mobile-612-js">
+(()=>{
+ const $id=id=>document.getElementById(id), header=document.querySelector('body>header'), nav=document.querySelector('body>nav');
+ const form=$id('instrumentCreate');if(form){const actions=document.createElement('div');actions.className='pc-instrument-actions';for(const b of [...form.children].filter(x=>x.tagName==='BUTTON'))actions.append(b);form.append(actions);form.elements.instrument?.setAttribute('autocomplete','off');}
+ if(header&&nav){const host=document.createElement('div');host.id='pcMobileNav';host.innerHTML='<button type="button" id="pcMobileMenuToggle" aria-label="Navigation menu" aria-expanded="false" aria-controls="pcMobileMenu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button><div id="pcMobileMenu" hidden></div>';header.append(host);const toggle=$id('pcMobileMenuToggle'),menu=$id('pcMobileMenu');const close=()=>{menu.hidden=true;toggle.setAttribute('aria-expanded','false')};for(const tab of nav.querySelectorAll('button')){const b=document.createElement('button');b.type='button';b.textContent=tab.textContent;b.dataset.tab=tab.id;b.onclick=()=>{close();tab.click()};menu.append(b)}menu.append(document.createElement('hr'));for(const [label,fn] of [['Settings',()=> $id('settingsGear').click()],['Return to home',()=>instrumentHome()]]){const b=document.createElement('button');b.type='button';b.textContent=label;b.onclick=()=>{close();fn()};menu.append(b)}toggle.onclick=()=>{if(!menu.hidden){close();return}for(const b of menu.querySelectorAll('[data-tab]')){if($id(b.dataset.tab)?.classList.contains('active'))b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')}menu.hidden=false;toggle.setAttribute('aria-expanded','true')};document.addEventListener('click',e=>{if(!host.contains(e.target))close()});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!menu.hidden){close();toggle.focus()}});}
+ const practice=$id('practicePage'),chart=$id('chart'),mq=matchMedia('(max-width:700px)');let selected=null,weekly=false;
+ if(practice&&chart){const bar=document.createElement('div');bar.id='pcMobileDays';chart.closest('.scroll').before(bar);const apply=()=>{const heads=[...chart.querySelectorAll('thead th')].slice(1);if(heads.length!==7)return;if(selected===null){selected=heads.findIndex(h=>h.classList.contains('today'));if(selected<0)selected=0}const dayMode=mq.matches&&!weekly;practice.classList.toggle('pc-day-mode',dayMode);for(const tr of chart.rows){if(tr.classList.contains('section')){const fill=tr.querySelector('.section-fill');if(fill)fill.colSpan=dayMode?1:7;continue}for(let i=1;i<tr.cells.length;i++)tr.cells[i].classList.toggle('pc-day-hidden',dayMode&&i!==selected+1)}bar.replaceChildren();heads.forEach((h,i)=>{const b=document.createElement('button');b.type='button';b.textContent=h.firstChild?.textContent?.trim()||['Mon','Tue','Wed','Thu','Fri','Sat','Sun'][i];b.setAttribute('aria-pressed',String(!weekly&&i===selected));b.onclick=()=>{selected=i;weekly=false;apply()};bar.append(b)});const b=document.createElement('button');b.type='button';b.className='pc-week-toggle';b.textContent=weekly?'Day':'Week';b.onclick=()=>{weekly=!weekly;apply()};bar.append(b)};new MutationObserver(apply).observe(chart,{childList:true});mq.addEventListener('change',apply);apply();const options=practice.querySelector('.practice-options-menu');if(options){for(const [label,fn] of [['Record lesson',()=> $id('recordLesson').click()],['Import audio',()=>chooseAudio()]]){const b=document.createElement('button');b.type='button';b.className='pc-mobile-audio';b.textContent=label;b.onclick=()=>{closePracticeOptions();fn()};options.append(b)}}}
+ const vv=window.visualViewport,root=document.documentElement;let timer;function keyboard(){const focused=document.activeElement,editable=focused?.matches('input:not([type=checkbox]):not([type=radio]):not([type=color]):not([type=range]):not([type=file]),textarea,[contenteditable=true]');const open=!!(vv&&editable&&innerHeight-vv.height>100);root.classList.toggle('pc-keyboard',open);if(vv){root.style.setProperty('--pc-vheight',vv.height+'px');root.style.setProperty('--pc-vtop',vv.offsetTop+'px')}if(open&&focused.closest('dialog[open]')){clearTimeout(timer);timer=setTimeout(()=>{const d=focused.closest('dialog[open]');if(!d)return;const r=focused.getBoundingClientRect(),dr=d.getBoundingClientRect();if(r.top<dr.top+12||r.bottom>dr.bottom-12)focused.scrollIntoView({block:'nearest',inline:'nearest'})},100)}}vv?.addEventListener('resize',keyboard);vv?.addEventListener('scroll',keyboard);document.addEventListener('focusin',keyboard);document.addEventListener('focusout',()=>setTimeout(keyboard,100));
+})();
+</script><style>.pc-mobile-audio{display:none!important}@media screen and (max-width:700px){.pc-mobile-audio{display:block!important}}</style>
